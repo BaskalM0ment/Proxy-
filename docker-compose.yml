@@ -1,0 +1,17 @@
+services:
+  proxy:
+    build:
+      context: ./docker/proxy
+    container_name: proxy-server
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+    ports:
+      - "127.0.0.1:3000:3000"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
