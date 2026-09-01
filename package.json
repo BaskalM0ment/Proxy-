@@ -1,0 +1,9 @@
+{
+  "name": "proxy-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A simple URL proxy frontend with a Netlify Function backend.",
+  "dependencies": {
+    "@netlify/functions": "^4.2.0"
+  }
+}
