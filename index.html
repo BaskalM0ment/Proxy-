@@ -1,25 +1,45 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Web proxy">
-<title>Proxy</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Web proxy">
+  <meta name="color-scheme" content="dark">
+  <title>Proxy</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<div class="shell">
-<header><div class="logo">P</div><span>Proxy</span><span class="ready">Ready</span></header>
-<main>
-<section class="hero"><h1>Browse the web.</h1><p>Enter a URL to open it through the proxy.</p></section>
-<section class="panel">
-<form id="proxyForm" class="urlbar"><input id="urlInput" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://example.com" aria-label="Website URL" required><button type="submit">Open</button></form>
-<div class="toolbar"><button id="blankButton" type="button">Open in about:blank</button><button id="backButton" type="button">Back</button><button id="forwardButton" type="button">Forward</button><button id="reloadButton" type="button">Reload</button></div>
-<p id="status" class="status">Enter a URL above to begin.</p>
-<iframe id="viewer" title="Proxy viewer" referrerpolicy="no-referrer"></iframe>
-</section>
-</main>
-</div>
-<script src="app.js"></script>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="logo" aria-hidden="true">P</div><span>Proxy</span></div>
+      <span class="ready" id="serviceState">Ready</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Browse the web.</h1>
+        <p>Enter an HTTP or HTTPS address to open it through the proxy.</p>
+      </section>
+
+      <section class="panel" aria-label="Proxy controls">
+        <form id="proxyForm" class="urlbar" novalidate>
+          <input id="urlInput" type="text" inputmode="url" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="https://example.com" aria-label="Website URL" required>
+          <button id="openButton" type="submit">Open</button>
+        </form>
+
+        <div class="toolbar">
+          <button id="blankButton" type="button">Open in about:blank</button>
+          <button id="backButton" type="button" disabled>Back</button>
+          <button id="forwardButton" type="button" disabled>Forward</button>
+          <button id="reloadButton" type="button" disabled>Reload</button>
+        </div>
+
+        <p id="status" class="status" role="status" aria-live="polite">Enter a URL above to begin.</p>
+        <iframe id="viewer" title="Proxy viewer" referrerpolicy="no-referrer"></iframe>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js" defer></script>
 </body>
 </html>
