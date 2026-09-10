@@ -1,13 +1,18 @@
 services:
   proxy:
     build:
-      context: ./docker/proxy
+      context: .
+      dockerfile: docker/proxy/Dockerfile
     container_name: proxy-server
     restart: unless-stopped
     environment:
       PORT: 3000
+      PROXY_USER_AGENT: "${PROXY_USER_AGENT:-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36}"
     ports:
       - "127.0.0.1:3000:3000"
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     security_opt:
       - no-new-privileges:true
     cap_drop:
@@ -15,3 +20,9 @@ services:
     read_only: true
     tmpfs:
       - /tmp
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:3000/health',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
